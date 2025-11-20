@@ -25,7 +25,7 @@ const [name,setname]=useState(()=>{
                        className="space-y-6"
                      >
                 <div className="flex justify-center items-center">
-                <img src="/image/logo.JPG" width={"200px"}></img>
+                <img src="/image/logo.png" width={"200px"}></img>
                 </div>
         <div>
             <h1 className="text-xl">العلوم الفزيائية والكيميائية </h1>
