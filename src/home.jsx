@@ -24,8 +24,15 @@ const [name,setname]=useState(()=>{
                        exit={{ opacity: 0, x: -30 }}
                        className="space-y-6"
                      >
-                <div className="flex justify-center items-center">
+                <div className="flex flex-col justify-center items-center">
                 <img src="/image/logo.png" width={"200px"}></img>
+                  <div className=" text-right text-emerald-900">
+                    <p>إعداد :</p>
+                    <p>الاستاذة / رقية بنت حسين أحمد حامضي</p>
+                    <p>ماجستير قياس وتقويم - بكالوريوس كيمياء</p>
+                    <p>إدارة تعليم جازان - المملكة العربية السعودية</p>
+                    </div>
+                
                 </div>
         <div>
             <h1 className="text-xl">العلوم الفزيائية والكيميائية </h1>
@@ -37,13 +44,13 @@ const [name,setname]=useState(()=>{
             onChange={(event)=>{
               setname(event.target.value);
             }}  
-            className=" w-full px-2 py-3 text-center rounded-lg shadow-lg outline-0 outline-blue-600" placeholder="الاسم"></input>
+            className=" w-full px-2 py-3 text-center rounded-lg shadow-lg outline-0 outline-blue-600" placeholder="اسم الطالب"></input>
         </div>
         <motion.button
          whileTap={{ scale: 0.9 }}
          onClick={handelbutton}
          disabled={name==""}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-lg shadow-lg disabled:bg-gray-300 disabled:cursor-not-allowed">{localStorage.getItem("name")!=null ? "إكمال الاسئلة" : "بداء الاسئلة"} </motion.button>
+        className="w-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-lg shadow-lg disabled:bg-gray-300 disabled:cursor-not-allowed">{localStorage.getItem("name")!=null ? "إكمال الاسئلة" : "بداء الاسئلة"} </motion.button>
         </motion.div>
         </AnimatePresence>
         </div>
