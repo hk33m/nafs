@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RefreshCcw,UserPen,X,Check } from "lucide-react";
+import { RefreshCcw,UserPen,X,Check,Download,Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom"
 import { questions } from "./data/questions";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,15 +24,7 @@ const certRef = useRef(null);
   return saved !== null ? parseInt(saved) : 0;
 });
 
-const getGrade = () => {
-  const percent = (score / questions.length) * 100;
 
-  if (percent >= 90) return "ممتاز 🌟";
-  if (percent >= 80) return "جيد جدًا 👏";
-  if (percent >= 70) return "جيد 👍";
-  if (percent >= 60) return "مقبول 🙂";
-  return "محاولة جيدة 💪";
-};
 
 const downloadCertificate = () => {
   if (!certRef.current) return;
@@ -168,6 +160,18 @@ useEffect(() => {
       },
     ]);
 
+    if(currentIndex + 1 == questions.length-1){
+           toast("تبقى سوال واحد فقط تأكد من اسمك الكامل  الذي سيعرض على الشهادة !  ",
+  {
+    icon: <Check></Check>,
+    style: {
+      borderRadius: '10px',
+      background: 'green',
+      color: '#fff',
+    },
+  }
+);
+    }
 
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex(currentIndex + 1);
@@ -318,7 +322,7 @@ useEffect(() => {
                 : "لا بأس! حاول من جديد وستتحسن 🔁"}
             </motion.div>
 
-            <div className="overflow-x-auto mt-8 h-[300px]">
+            <div className="overflow-x-auto border mt-8 h-[300px]">
               <table className="w-full text-center border-collapse">
                 <thead>
                   <tr className="bg-blue-200 text-blue-900 sticky top-0">
@@ -352,14 +356,9 @@ useEffect(() => {
               </table>
             </div>
 
-            <button
-              onClick={() =>resetQuiz()}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-lg mt-5"
-            >
-              إعادة الاختبار 🔄
-            </button>
+            
             {/* ===== الشهادة ===== */}
-<div className="flex flex-col items-center gap-6 mt-10">
+<div className="flex flex-col items-center gap-6 mt-5">
 
   <div
     ref={certRef}
@@ -378,21 +377,30 @@ useEffect(() => {
       <h1>فرع : العلوم الفيزيائية</h1>
       <h1 className="text-amber-700 font-bold">الدرجة : {score} / {questions.length} بنسبة  ({Number(score)/Number(questions.length)*100} % ) </h1>
       <div className="flex px-8 gap-1 justify-center mt-1 pl-4 text-gray-600">
-        <h1> {JSON.parse(localStorage.getItem("datash")).day} | </h1>
-        <h1> {JSON.parse(localStorage.getItem("datash")).time} | </h1>
-        <h1> {JSON.parse(localStorage.getItem("datash")).date} م</h1>
+        <h1 className="bg-white shadow-lg px-2 py-1 rounded-md"> {JSON.parse(localStorage.getItem("datash")).day}  </h1>
+        <h1 className="bg-white shadow-lg px-2 py-1 rounded-md"> {JSON.parse(localStorage.getItem("datash")).time}  </h1>
+        <h1 className="bg-white shadow-lg px-2 py-1 rounded-md"> {JSON.parse(localStorage.getItem("datash")).date} م</h1>
       </div>
     </div>
   </div>
   <img src="image/nafs.png" className="w-[50px] md:w-[100px] absolute top-[21px] md:top-[50px] left-[30px] md:left-[66px]"></img>
   </div>
 
+<div className="flex gap-2">
   <button
     onClick={downloadCertificate}
-    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg"
+    className="bg-green-600 hover:bg-green-700 text-white px-6 flex gap-2 justify-center items-center py-3 rounded-xl shadow-lg"
   >
-    حفظ الشهادة في المعرض 📥
+    حفظ الشهادة في المعرض <Download></Download>
   </button>
+  
+  </div>
+  <button
+              onClick={() =>resetQuiz()}
+              className="bg-blue-600 hover:bg-blue-700 flex gap-2 text-white px-6 py-3 rounded-xl shadow-lg mt-2"
+            >
+              إعادة الاختبار <RefreshCcw></RefreshCcw>
+            </button>
 </div>
 
           </motion.div>
