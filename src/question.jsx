@@ -81,6 +81,31 @@ const [name,setname]=useState(()=>{
     return n!==null ? JSON.parse(n) : "" 
 });
 
+const [hasShownToast, setHasShownToast] = useState(false);
+
+  useEffect(() => {
+    if (currentIndex === 0 && !hasShownToast) {
+      toast(
+        '🌟 هيا بنا نبدأ! خذي نفسًا عميقًا وركزي 💖 أنتِ مستعدة لتبدعي 📝✨',
+        {
+          duration: 7000,
+          position: 'top-center',
+          style: {
+            background: '#fff0f5',
+            color: '#d6336c',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            borderRadius: '10px',
+            padding: '15px',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+          },
+        }
+      );
+      setHasShownToast(true);
+    }
+  }, [currentIndex, hasShownToast]);
+
+
 useEffect(() => {
   localStorage.setItem("isFinished", JSON.stringify(isFinished));
 }, [isFinished]);
@@ -116,6 +141,7 @@ useEffect(() => {
       correctRef.current.play();
       toast("إجابة صحيحة! أحسنت ",
   {
+    duration: 2000,
     icon: <Check></Check>,
     style: {
       borderRadius: '10px',
@@ -130,6 +156,7 @@ useEffect(() => {
       wrongRef.current.play();
       toast(' إجابة خاطئة!حاول في السؤال التالي',
   {
+    duration: 2000,
     icon:<X></X>,
     style: {
       borderRadius: '10px',
@@ -162,13 +189,14 @@ useEffect(() => {
 
      if (currentIndex+1 === questions.length - 1 && !isFinished) {
     toast.custom((t) => (
-      <div className="bg-yellow-500 text-white p-4 rounded-xl shadow-lg w-[300px] text-center">
+      <div className="bg-yellow-700 text-white p-4 rounded-xl shadow-lg w-[300px] text-center">
         <h2 className="font-bold text-lg mb-2">تنبيه ⚠️</h2>
-        <p className="text-sm mb-3">
+        <p className="text-sm ">
           هذا هو السؤال الأخير<br />
           يرجى التأكد من كتابة الاسم الكامل<br />
           لأنه سيظهر في الشهادة 🎓
         </p>
+        <p className="text-sm mb-3"> يمكن تعديل الاسم من هذه الايقونة <UserPen className="inline"></UserPen></p>
 
         <button
           onClick={() => toast.dismiss(t.id)}
@@ -182,6 +210,8 @@ useEffect(() => {
       position: "top-center"
     });
   }
+
+  
 
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex(currentIndex + 1);
@@ -200,6 +230,8 @@ useEffect(() => {
 
   const resetQuiz = () => {
   localStorage.removeItem("currentIndex");
+  setCurrentIndex(0);
+  setHasShownToast(false);
   localStorage.removeItem("answers");
   setCurrentIndex(0);
   setAnswers([]);
@@ -380,13 +412,20 @@ useEffect(() => {
     <h1 className="text-[11px] md:text-xl font-bold">شهادة إتمام تدريب</h1>
     <h1  className="text-[10px] md:text-xl">Certificate of Training Completion</h1>
     <div className="mt-4 md:mt-10 text-[9px] space-y-1 md:space-y-2  md:text-xl">
-      <h1>تشهد منصة تدريب أختبار نافس بأن  </h1>
-      <h1 className="text-right mr-[31%]">الطالبة : <span className="text-amber-700 font-bold">{name}</span> </h1>
+      <h1>تشهد منصة تدريب اختبار نافس بأن  </h1>
+      <h1 className="text-right mr-[32%] md:mr-[31%]">الطالبة : <span className="text-amber-700 font-bold">{name}</span> </h1>
       <h1>الصف : الثالث المتوسط</h1>
       <h1>قد أتمت تدريب مادة العلوم بنجاح</h1>
       <h1>فرع : العلوم الفيزيائية</h1>
-      <h1 className="text-amber-700 font-bold">الدرجة : {score} / {questions.length} بنسبة  ({((Number(score) / Number(questions.length)) * 100).toFixed(2)} %)
- </h1>
+     <h1 className="text-amber-700 font-bold">
+  الدرجة : {score} / {questions.length} بنسبة  (
+    {(() => {
+      const percentage = (Number(score) / Number(questions.length)) * 100;
+      // إذا كان صحيح بدون كسور نرجع العدد كـ int، وإلا نحتفظ بكسور
+      return Number.isInteger(percentage) ? percentage : percentage.toFixed(2);
+    })()} %
+  )
+</h1>
       <div className="flex px-8 gap-1 justify-center mt-1 pl-4 text-gray-600">
         <h1 className="bg-white shadow-lg px-2 py-1 rounded-md"> {JSON.parse(localStorage.getItem("datash")).day}  </h1>
         <h1 className="bg-white shadow-lg px-2 py-1 rounded-md"> {JSON.parse(localStorage.getItem("datash")).time}  </h1>
