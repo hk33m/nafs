@@ -11,25 +11,25 @@ const subjects = [
     title: "العلوم الكيميائية",
     icon: <FaFlask size={40} />,
     color: "from-pink-500 to-red-400",
-    link: "https://saudiexam.netlify.app/"
+    link: "https://nafsexam1.vercel.app/"
   },
   {
     title: "العلوم الفيزيائية",
     icon: <FaAtom size={40} />,
     color: "from-blue-500 to-cyan-400",
-    link: "https://saudiexam4.netlify.app/"
+    link: "https://nafsexam4.vercel.app/"
   },
   {
     title: "علوم الأرض والفضاء",
     icon: <FaGlobe size={40} />,
     color: "from-green-500 to-emerald-400",
-    link: "https://saudiexam2.netlify.app/"
+    link: "https://nafsexam2.vercel.app/"
   },
   {
     title: "علوم الحياة",
     icon: <FaMicroscope size={40} />,
     color: "from-purple-500 to-indigo-400",
-    link: "https://saudiexam3.netlify.app/"
+    link: "https://nafsexam3.vercel.app/"
   }
 ];
 
