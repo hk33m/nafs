@@ -11,25 +11,25 @@ const subjects = [
     title: "العلوم الكيميائية",
     icon: <FaFlask size={40} />,
     color: "from-pink-500 to-red-400",
-    link: "/chemistry"
+    link: "https://saudiexam.netlify.app/"
   },
   {
     title: "العلوم الفيزيائية",
     icon: <FaAtom size={40} />,
     color: "from-blue-500 to-cyan-400",
-    link: "/physics"
+    link: "https://saudiexam4.netlify.app/"
   },
   {
     title: "علوم الأرض والفضاء",
     icon: <FaGlobe size={40} />,
     color: "from-green-500 to-emerald-400",
-    link: "/earth"
+    link: "https://saudiexam2.netlify.app/"
   },
   {
     title: "علوم الحياة",
     icon: <FaMicroscope size={40} />,
     color: "from-purple-500 to-indigo-400",
-    link: "/biology"
+    link: "https://saudiexam3.netlify.app/"
   }
 ];
 
